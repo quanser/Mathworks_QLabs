@@ -1,21 +1,46 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\localProjects\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="C:\localProjects\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
-    <param.appname>Quanser Interactive Labs for MATLAB</param.appname>
+  <configuration file="C:\Users\pmartin\Documents\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="C:\Users\pmartin\Documents\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>Quanser Interactive Labs Add-On</param.appname>
     <param.authnamewatermark>Quanser</param.authnamewatermark>
-    <param.email>info@quanser.com</param.email>
+    <param.email>digital@quanser.com</param.email>
     <param.company>Quanser</param.company>
     <param.summary>Download, install, and launch Quanser Interactive Labs from within MATLAB</param.summary>
-    <param.description>A set of functions to make it easy to get and use Quanser Interactive Labs.
- * Type ``QLabs.install`` to download and install.  
- * Type ``QLabs.register`` to go to the Quanser registration page.
- * Type ``QLabs.launch`` to launch the Quanser Interactive Labs.
+    <param.description># Quanser Interactive Labs for MATLAB
 
-Quanser Interactive Labs require:
+Download, install, and launch Quanser Interactive Labs from within MATLAB&amp;reg;
+
+Quanser Interactive Labs (QLabs) is the only hardware-inspired, scalable way to bring credible, high-fidelity interactive lab experiences to students off-campus. Offering a fast and easy way to deliver real hardware experiences to students in blended, hybrid, and remote laboratory configurations, QLabs delivers a collection of virtual hardware-based laboratory activities that supplement traditional or online courses. The virtual hardware is based on industry leading Quanser physical systems and offers credible, academically appropriate experiences offline on desktops and laptops on and off campus.
+
+If you are a member of a MathWorks Academic Site License, please visit the [registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing the platform to create your account, and gain access to a set of key experiments for free.
+
+This repository contains a set of functions to make it easy to get and use Quanser Interactive Labs.
+
+* ``QLabs.register`` opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).
+* ``QLabs.download`` downloads Quanser Interactive Labs.  Shows a progess meter.  
+* ``QLabs.install`` Installs Quanser Interactive Labs. Downloads if needed.  
+* ``QLabs.launch`` launches Quanser Interactive Labs.  Downloads and installs if needed.
+* ``QLabs.uninstall`` uninstalls QLabs and deletes temporary downloaded files.  
+* ``QLabs.deleteZipAndInstaller`` deletes temporary downloaded files (hidden: just for testing).
+
+## System Requirements
+
+### Software
 * MATLAB
-* Simulink</param.description>
-    <param.screenshot>${PROJECT_ROOT}\img\Quanser Logo.jpg</param.screenshot>
+* Simulink&amp;reg;
+* Windows 10 64-bit
+
+### Minimum
+* __Video Card:__ Intel HD 520 or equivalent DX11 GPU
+* __Processor:__ Core i5-6300U series mobile CPU or equivalent
+* __Memory:__ 8 GB RAM
+
+### Recommended	
+* __Video Card:__ Intel UHD 620 or equivalent GPU
+* __Processor:__ Core i7-8665U mobile CPU or equivalent
+* __Memory:__ 16 GB RAM</param.description>
+    <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
     <param.version>1.0.0.1</param.version>
-    <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
+    <param.output>${PROJECT_ROOT}\Quanser Interactive Labs Add-On.mltbx</param.output>
     <param.products.name />
     <param.products.id />
     <param.products.version />
@@ -38,7 +63,7 @@ releaseQLabs.m</param.exclude.filters>
     <param.required.addons />
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start>R2019b</param.release.start>
+    <param.release.start>R2020a</param.release.start>
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
@@ -92,48 +117,18 @@ releaseQLabs.m</param.exclude.filters>
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs for MATLAB.mltbx" optional="false">C:\localProjects\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs Add-On.mltbx" optional="false">C:\Users\pmartin\Documents\Mathworks_QLabs\Quanser Interactive Labs Add-On.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2021b</root>
+      <root>C:\Program Files\MATLAB\R2021a</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
-        <toolbox name="embeddedcoder" />
-        <toolbox name="gpucoder" />
-        <toolbox name="fixedpoint" />
-        <toolbox name="matlabhdlcoder" />
-        <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
           <enabled>true</enabled>
         </matlabcoder>
-      </toolbox>
-      <toolbox>
-        <embeddedcoder>
-          <enabled>true</enabled>
-        </embeddedcoder>
-      </toolbox>
-      <toolbox>
-        <gpucoder>
-          <enabled>true</enabled>
-        </gpucoder>
-      </toolbox>
-      <toolbox>
-        <fixedpoint>
-          <enabled>true</enabled>
-        </fixedpoint>
-      </toolbox>
-      <toolbox>
-        <matlabhdlcoder>
-          <enabled>true</enabled>
-        </matlabhdlcoder>
-      </toolbox>
-      <toolbox>
-        <neuralnetwork>
-          <enabled>true</enabled>
-        </neuralnetwork>
       </toolbox>
     </matlab>
     <platform>
