@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
   <configuration file="C:\Users\pmartin\Documents\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="C:\Users\pmartin\Documents\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
-    <param.appname>Quanser Interactive Labs Add-On</param.appname>
+    <param.appname>Quanser Interactive Labs for MATLAB</param.appname>
     <param.authnamewatermark>Quanser</param.authnamewatermark>
     <param.email>digital@quanser.com</param.email>
     <param.company>Quanser</param.company>
@@ -40,7 +40,7 @@ This repository contains a set of functions to make it easy to get and use Quans
 * __Memory:__ 16 GB RAM</param.description>
     <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
     <param.version>1.0.0.1</param.version>
-    <param.output>${PROJECT_ROOT}\Quanser Interactive Labs Add-On.mltbx</param.output>
+    <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
     <param.products.name />
     <param.products.id />
     <param.products.version />
@@ -117,7 +117,7 @@ releaseQLabs.m</param.exclude.filters>
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs Add-On.mltbx" optional="false">C:\Users\pmartin\Documents\Mathworks_QLabs\Quanser Interactive Labs Add-On.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs for MATLAB.mltbx" optional="false">C:\Users\pmartin\Documents\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>

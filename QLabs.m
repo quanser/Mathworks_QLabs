@@ -114,7 +114,7 @@ classdef QLabs
             portalURI = QLabs.createSecureURI(QLabs.RegistrationHost, QLabs.RegistrationPath);
             stat = web(portalURI,"-browser");
             if stat ~= 0
-                error("QLabs:CouldNotLaunchBrowser",'Could not launch system browser.  Please visit the <a href="%s">Quanser Academic Portal</a> in your web browser.',portalURI.EncodedURI);
+                error("QLabs:CouldNotLaunchBrowser",'Could not launch system browser. Please visit the QLabs registration page for MathWorks Academic Site License users at <a href="%s">QLabs Registration</a> in your web browser.',portalURI.EncodedURI);
             end
         end
 
