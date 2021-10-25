@@ -6,11 +6,11 @@ Quanser Interactive Labs (QLabs) is the only hardware-inspired, scalable way to 
 
 ## Getting Started
 
-If you are a member of a MathWorks Academic Site License, you can gain access to a set of key experiments for free.
+If you are a member of a MathWorks Academic Site License, you can gain acces to a set of essential virtual experiments for free. Otherwise, please visit [Quanser](https://www.quanser.com/digital/quanser-interactive-labs/) for more information
 
-1. Please visit the [registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing the platform to create your account.
+1. If you have not done so already, please visit the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing the platform to create your account.
 2. In MATLAB, click the Add-ons icon in the Home toolstrip to open the Add-on Explorer.
-3. In the Add-on Explorer, search for “Qlabs” and choose “Add”
+3. In the Add-on Explorer, search for “Quanser” or "QLabs", and choose “Add”
 4. Type ``QLabs.install`` in MATLAB to start the installation process
 5. Once install completes, type ``QLabs.launch``
 
