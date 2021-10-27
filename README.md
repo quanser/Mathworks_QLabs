@@ -20,7 +20,7 @@ The add-on contains several commands to make it easy to download, install, and u
 
 |Command|Description|
 |--------|-----------|
-|``QLabs.register``|opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).|
+|``QLabs.register``|Opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).|
 |``QLabs.install``|Installs Quanser Interactive Labs. Downloads if needed.|
 |``QLabs.launch``|launches Quanser Interactive Labs.  Downloads and installs if needed.|
 |``QLabs.uninstall``|uninstalls QLabs and deletes temporary downloaded files.|
