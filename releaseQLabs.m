@@ -7,7 +7,7 @@ function newVersion = releaseQLabs(releaseType)
     end
     packagingProjectFile = fullfile("Quanser Interactive Labs for MATLAB.prj");
     newVersion = incrementMLTBXVersion(packagingProjectFile,releaseType);
-    matlab.addons.toolbox.packageToolbox(packagingProjectFile,'release/Quanser Interactive Labs for MATLAB')
+    matlab.addons.toolbox.packageToolbox(packagingProjectFile,'release/Quanser_Interactive_Labs_for_MATLAB')
     
     function newVersion = incrementMLTBXVersion(packagingProjectFile, releaseType)
         oldVersion = string(matlab.addons.toolbox.toolboxVersion(packagingProjectFile));

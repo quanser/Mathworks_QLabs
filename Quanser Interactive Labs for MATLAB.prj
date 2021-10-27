@@ -13,7 +13,7 @@ If you have a MathWorks Campus-Wide License and are part of the MathWorks/Quanse
 
 Type ``QLabs.install`` in MATLAB to start the installation process.  Once install completes, type ``QLabs.launch``</param.description>
     <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
-    <param.version>1.0.0.3</param.version>
+    <param.version>1.0.0.5</param.version>
     <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
     <param.products.name />
     <param.products.id />
