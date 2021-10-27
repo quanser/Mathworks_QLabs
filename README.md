@@ -2,7 +2,7 @@
 
 Download, install, and launch Quanser Interactive Labs from within MATLAB&reg;
 
-Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring credible, high-fidelity interactive lab experiences to students. Offering a fast and easy way to deliver real hardware experiences to students in blended, hybrid, and remote laboratory configurations, QLabs delivers a collection of virtual hardware-based laboratory activities that supplement traditional or online courses. The virtual hardware is based on industry leading Quanser physical systems and offers credible, academically appropriate experiences offline on desktops and laptops on and off campus.
+Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring credible, high-fidelity interactive lab experiences to students in blended, hybrid, or remote laboratory configurations. QLabs delivers a collection of virtual hardware-based laboratory activities that can supplement traditional or online courses. The virtual hardware is based on industry leading Quanser physical systems and offers academically appropriate experiences offline on desktops and laptops on and off campus.
 
 ## Getting Started
 
