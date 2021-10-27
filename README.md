@@ -16,12 +16,14 @@ If you have a MathWorks Campus-Wide License, you can gain access to 3 essential 
 
 ## More Information
 
-The add-on contains several functions to make it easy to download, install, and use Quanser Interactive Labs:
+The add-on contains several commands to make it easy to download, install, and use Quanser Interactive Labs:
 
-* ``QLabs.register`` opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).
-* ``QLabs.install`` Installs Quanser Interactive Labs. Downloads if needed.  
-* ``QLabs.launch`` launches Quanser Interactive Labs.  Downloads and installs if needed.
-* ``QLabs.uninstall`` uninstalls QLabs and deletes temporary downloaded files.  
+|Command|Description|
+|--------|-----------|
+|``QLabs.register``|opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).|
+|``QLabs.install``|Installs Quanser Interactive Labs. Downloads if needed.|
+|``QLabs.launch``|launches Quanser Interactive Labs.  Downloads and installs if needed.|
+|``QLabs.uninstall``|uninstalls QLabs and deletes temporary downloaded files.|
 
 ## System Requirements
 
