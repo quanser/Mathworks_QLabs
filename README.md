@@ -27,17 +27,17 @@ The add-on contains several functions to make it easy to download, install, and 
 
 ### Software
 
-* MATLAB
+* MATLAB R2020a or later
 * Simulink&reg;
-* Windows 10 64-bit
+* Windows 10 (version 1909 or higher)
 
-### Minimum
+### Minimum Hardware
 
 * __Video Card:__ Intel HD 520 or equivalent DX11 GPU
 * __Processor:__ Core i5-6300U series mobile CPU or equivalent
 * __Memory:__ 8 GB RAM
 
-### Recommended
+### Recommended Hardware
 
 * __Video Card:__ Intel UHD 620 or equivalent GPU
 * __Processor:__ Core i7-8665U mobile CPU or equivalent
