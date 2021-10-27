@@ -16,7 +16,7 @@ If you have a MathWorks Campus-Wide License, you can gain access to 3 essential 
 
 ## More Information
 
-Functions to make it easy to download, install, and use Quanser Interactive Labs:
+The add-on contains several functions to make it easy to download, install, and use Quanser Interactive Labs:
 
 * ``QLabs.register`` opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).
 * ``QLabs.install`` Installs Quanser Interactive Labs. Downloads if needed.  
@@ -26,16 +26,19 @@ Functions to make it easy to download, install, and use Quanser Interactive Labs
 ## System Requirements
 
 ### Software
+
 * MATLAB
 * Simulink&reg;
 * Windows 10 64-bit
 
 ### Minimum
+
 * __Video Card:__ Intel HD 520 or equivalent DX11 GPU
 * __Processor:__ Core i5-6300U series mobile CPU or equivalent
 * __Memory:__ 8 GB RAM
 
-### Recommended	
+### Recommended
+
 * __Video Card:__ Intel UHD 620 or equivalent GPU
 * __Processor:__ Core i7-8665U mobile CPU or equivalent
 * __Memory:__ 16 GB RAM
