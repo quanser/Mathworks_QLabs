@@ -1,4 +1,4 @@
-classdef QLabsDownloadProgress < matlab.net.http.ProgressMonitor
+classdef (Hidden) QLabsDownloadProgress < matlab.net.http.ProgressMonitor
     properties
         ProgHandle
         Direction matlab.net.http.MessageType
@@ -6,7 +6,7 @@ classdef QLabsDownloadProgress < matlab.net.http.ProgressMonitor
         NewDir matlab.net.http.MessageType = matlab.net.http.MessageType.Request
     end
     
-    methods
+    methods (Hidden)
         function obj = QLabsDownloadProgress
             obj.Interval = .001;
         end
@@ -18,7 +18,9 @@ classdef QLabsDownloadProgress < matlab.net.http.ProgressMonitor
         function delete(obj)
             obj.closeit();
         end
-        
+    end
+    
+    methods
         function set.Direction(obj, dir)
             obj.Direction = dir;
             obj.changeDir();
