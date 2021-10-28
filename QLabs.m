@@ -217,33 +217,9 @@ classdef QLabs
 
             QLabs.errorIfPlatformInvalid;
 
-            result = false;
-            try
-                encodedVersion = uint32(winqueryreg("HKEY_CLASSES_ROOT","Installer\\Products\\A3271525561556E4CBC53650521B00D9","Version"));
-            catch
-                % if winqueryreg errors, the key doesn't exist -- return
-                % false.
-                return;
-            end
-            major = bitshift(bitand(encodedVersion,0xFF000000),-24);
-            minor = bitshift(bitand(encodedVersion,0x00FF0000),-16);
-            rel =   bitand(encodedVersion,0x0000FFFF);
-            
-            key = sprintf("SOFTWARE\\Classes\\Installer\\Dependencies\\Quanser.QLABS.%d.%d.%d",major,minor,rel);
-            try
-                winqueryreg("HKEY_LOCAL_MACHINE",key);
-            catch
-                % if winqueryreg errors, the key doesn't exist -- return
-                % false.
-                return;
-            end
-            
-            % if we get this far, it's installed
-            result = true;
-
-            % Old way: Look for the .EXE
-            %qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.QLabFileName);
-            %result = logical(exist(qlabPath,"file"));
+            % Look for the .EXE
+            qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.QLabFileName);
+            result = logical(exist(qlabPath,"file"));
         end
     end
 
