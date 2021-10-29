@@ -17,8 +17,10 @@ classdef QLabs
         ZipFileName = "lhf0gilgy1zu5hedkokb9mi025gzcu19.zip";
         InstallerFileName = "Install QLabs.exe";
 
-        %Installed Application name
+        %Installed Application info
+        QLabInstalledRegistrationSubKey = "SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UpgradeCodes\8846B7B58AF54674387D6C27459B5088";
         QLabFileName = "Quanser Interactive Labs.exe";
+        QLabFilePathInProgramFiles = ["Quanser","Quanser Interactive Labs"];
         DownloadDir = tempdir;
     end
     
@@ -214,9 +216,16 @@ classdef QLabs
         
         function result = isInstalled()
             % isInstalled Returns true if QLabs is installed.
-
             QLabs.errorIfPlatformInvalid;
 
+            % Check the registry
+            try
+                winqueryreg("name","HKEY_LOCAL_MACHINE",QLabs.QLabInstalledRegistrationSubKey);
+            catch
+                result = false;
+                return
+            end
+            
             % Look for the .EXE
             qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.QLabFileName);
             result = logical(exist(qlabPath,"file"));
@@ -254,11 +263,22 @@ classdef QLabs
         function path = getQLabsDirectory()
             % getQLabsDirectory Gets the QLab directory in program files
 
-            [exitcode,programFilesDirectory] = system("echo %ProgramFiles%");
-            if exitcode ~= 0
-                error("QLabs:CouldNotLaunchBrowser","Cannot identify Program Files directory")
+            path = fullfile(QLabs.getProgramFilesDirectory(),join(QLabs.QLabFilePathInProgramFiles,filesep));
+            if ~logical(exist(path,"dir"))
+                error("QLabs:CouldNotFindQLabsEXE","Cannot locate QLabs directory")
             end
-            path = fullfile(strtrim(string(programFilesDirectory)),"Quanser","Quanser Interactive Labs");
+        end
+
+        function path = getProgramFilesDirectory()
+            %getProgramFilesDirectory Gets the location of the Windows Program Files directory from the registry
+            try
+                path = strtrim(string(winqueryreg("HKEY_LOCAL_MACHINE","SOFTWARE\Microsoft\Windows\CurrentVersion","ProgramFilesPath")));
+            catch e
+                error("QLabs:CouldNotFindQLabsEXE","Cannot locate Program Files directory")
+            end
+            if ~logical(exist(path,"dir"))
+                error("QLabs:CouldNotFindQLabsEXE","Cannot locate Program Files directory")
+            end
         end
     end
 
