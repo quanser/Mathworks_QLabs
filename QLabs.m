@@ -155,7 +155,19 @@ classdef QLabs
             end
 
             qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.QLabFileName);
-            system(qlabPath);
+            try
+                % Launch using .NET interface to avoid ugly command window
+                System.Diagnostics.Process.Start(qlabPath);
+            catch
+                
+                try
+                    % Alternative: Launch using system with trailing
+                    % ampersand to return immediately.
+                    system(qlabPath + " &");
+                catch
+                    error("QLabs:CouldNotLaunch","Could not launch QLabs")
+                end
+            end
         end
 
         function uninstall()
