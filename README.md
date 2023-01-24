@@ -6,12 +6,12 @@ Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring c
 
 ## Getting Started
 
-If you have a MathWorks Campus-Wide License and are part of the MathWorks/Quanser pilot program, you can gain access to 3 virtual experiments for free. Otherwise, please visit [Quanser](https://www.quanser.com/digital/quanser-interactive-labs/) for more information.
+If you have a MathWorks Campus-Wide License, you can gain access to the QLabs Virtual QUBE-Servo 2 DC Motor virtual experiment for free. Otherwise, please visit [Quanser](https://www.quanser.com/digital/quanser-interactive-labs/) for more information.
 
 1. If you have not done so already, please visit the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing to create your account.
-2. In GitHub, download the `Quanser_Interactive_Labs_for_MATLAB.mltbx` [here](https://github.com/quanser/Mathworks_QLabs/releases/download/v1.0.0.8/Quanser_Interactive_Labs_for_MATLAB.mltbx).  You can also click on the latest release on the right side of this page.
-3. Double click the file downloaded either in the current folder browser within MATLAB or in the Windows File Explorer.
-4. Once the add-in is installed, type ``QLabs.install`` in MATLAB to start the installation process
+2. In GitHub, download the latest `Quanser_Interactive_Labs_for_MATLAB.mltbx` file, or search for Quanser in the MATALB Add-on Explorer.
+3. Double click the file downloaded, or install the add-on in MATLAB
+4. Once the add-in is installed, type ``QLabs.setup`` in MATLAB to start the installation process
 5. Once install completes, type ``QLabs.launch``
 
 ## More Information
@@ -21,17 +21,17 @@ The add-on contains several commands to make it easy to download, install, and u
 |Command|Description|
 |--------|-----------|
 |``QLabs.register``|Opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).|
-|``QLabs.install``|Installs Quanser Interactive Labs. Downloads if needed.|
+|``QLabs.setup``|Installs Quanser Interactive Labs. Downloads if needed.|
 |``QLabs.launch``|launches Quanser Interactive Labs.  Downloads and installs if needed.|
-|``QLabs.uninstall``|uninstalls QLabs and deletes temporary downloaded files.|
+|``QLabs.remove``|uninstalls QLabs and deletes temporary downloaded files.|
 
 ## System Requirements
 
 ### Software
 
-* MATLAB R2020a or later
+* MATLAB R2021a or later
 * Simulink&reg;
-* Windows 10 (version 1909 or higher)
+* Windows 10 or later, or macOS Mojave 10.14.6 or later
 
 ### Minimum Hardware
 

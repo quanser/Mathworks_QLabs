@@ -1,29 +1,43 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\localProjects\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="C:\localProjects\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="660385911" file="C:\Users\jshu\MATLAB\Mathworks_QLabs\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="C:\Users\jshu\MATLAB\Mathworks_QLabs\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Quanser Interactive Labs for MATLAB</param.appname>
     <param.authnamewatermark>Quanser</param.authnamewatermark>
     <param.email>digital@quanser.com</param.email>
     <param.company>Quanser</param.company>
-    <param.summary>Download, install, and launch Quanser Interactive Labs from within MATLAB</param.summary>
+    <param.summary>High-fidelity digital twins of Quanser’s world renowned controls, mechatronics, and robotics hardware for teaching and research.</param.summary>
     <param.description>Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring credible, high-fidelity interactive lab experiences to students in blended, hybrid, or remote laboratory configurations. QLabs delivers a collection of virtual hardware-based laboratory activities that can supplement traditional or online courses. The virtual hardware is based on industry leading Quanser physical systems and offers academically appropriate experiences offline on desktops and laptops on and off campus.
 
 Getting Started
 
-If you have a MathWorks Campus-Wide License and are part of the MathWorks/Quanser pilot program, you can gain access to 3 virtual experiments for free. Otherwise, please visit https://www.quanser.com/digital/quanser-interactive-labs/ for more information.
+If you have a MathWorks Campus-Wide License, you can gain access to the Virtual QUBE-Servo 2 DC Motor virtual experiment for free. Otherwise, please visit https://www.quanser.com/digital/quanser-interactive-labs/ for more information.
 
-Type ``QLabs.install`` in MATLAB to start the installation process.  Once install completes, type ``QLabs.launch``</param.description>
+Type ``QLabs.setup`` in MATLAB to configure Quanser Interactive Labs after installing the add-on (only need to run it once). Once setup is done, type ``QLabs.launch`` to launch the Quanser Interactive Labs.</param.description>
     <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
-    <param.version>1.0.0.5</param.version>
+    <param.version>2.14.0.1</param.version>
     <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
-    <param.products.name />
-    <param.products.id />
-    <param.products.version />
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Simulink</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+      <item>2</item>
+    </param.products.id>
+    <param.products.version>
+      <item>9.11</item>
+      <item>10.4</item>
+    </param.products.version>
     <param.platforms />
     <param.guid>10b5302e-ce6e-4dec-8fa7-e6544bf6d35f</param.guid>
     <param.exclude.filters>.git*
 img
+QLabs.asv
 README.md
-releaseQLabs.m</param.exclude.filters>
+releaseQLabs.m
+.DS_Store
+release
+resources
+QLabsDownloadProgress.m</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -37,24 +51,31 @@ releaseQLabs.m</param.exclude.filters>
     <param.required.addons />
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start>R2020a</param.release.start>
+    <param.release.start>R2021a</param.release.start>
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
-    <param.compatiblity.macos>false</param.compatiblity.macos>
+    <param.compatiblity.macos>true</param.compatiblity.macos>
     <param.compatiblity.linux>false</param.compatiblity.linux>
     <param.compatiblity.matlabonline>false</param.compatiblity.matlabonline>
-    <param.installation.map />
-    <param.additional.sw.names />
-    <param.additional.sw.licenses />
-    <param.additional.sw.win.url />
-    <param.additional.sw.mac.url />
-    <param.additional.sw.linux.url />
+    <param.installation.map>+Mathworks_QLabs\getInstallationLocation.mlx</param.installation.map>
+    <param.additional.sw.names>
+      <item>Quanser Interactive Labs and QUARC Home for MATLAB Simulink</item>
+    </param.additional.sw.names>
+    <param.additional.sw.licenses>
+      <item>https://www.quanser.com/digital-eula</item>
+    </param.additional.sw.licenses>
+    <param.additional.sw.win.url>
+      <item>https://quanserinc.box.com/shared/static/lhf0gilgy1zu5hedkokb9mi025gzcu19.zip</item>
+    </param.additional.sw.win.url>
+    <param.additional.sw.mac.url>
+      <item>https://quanserinc.box.com/shared/static/cd521ztbt9ym0vn1xe193rrn27v3s32p.zip</item>
+    </param.additional.sw.mac.url>
+    <param.additional.sw.linux.url>
+      <item />
+    </param.additional.sw.linux.url>
     <unset>
       <param.output />
-      <param.products.name />
-      <param.products.id />
-      <param.products.version />
       <param.platforms />
       <param.exclude.pcodedmfiles />
       <param.examples />
@@ -71,12 +92,7 @@ releaseQLabs.m</param.exclude.filters>
       <param.matlab.project.name />
       <param.release.current.only />
       <param.compatiblity.windows />
-      <param.installation.map />
-      <param.additional.sw.names />
-      <param.additional.sw.licenses />
-      <param.additional.sw.win.url />
-      <param.additional.sw.mac.url />
-      <param.additional.sw.linux.url />
+      <param.compatiblity.macos />
     </unset>
     <fileset.rootdir>
       <file>${PROJECT_ROOT}</file>
@@ -84,25 +100,19 @@ releaseQLabs.m</param.exclude.filters>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\LICENSE</file>
       <file>${PROJECT_ROOT}\QLabs.m</file>
-      <file>${PROJECT_ROOT}\QLabsDownloadProgress.m</file>
-      <file>${PROJECT_ROOT}\release</file>
-      <file>${PROJECT_ROOT}\resources</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs for MATLAB.mltbx" optional="false">C:\localProjects\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs for MATLAB.mltbx" optional="false">C:\Users\jshu\MATLAB\Mathworks_QLabs\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2021b</root>
+      <root>K:\Program Files\MATLAB\R2021b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
-        <toolbox name="embeddedcoder" />
         <toolbox name="gpucoder" />
-        <toolbox name="fixedpoint" />
-        <toolbox name="matlabhdlcoder" />
         <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
@@ -111,24 +121,9 @@ releaseQLabs.m</param.exclude.filters>
         </matlabcoder>
       </toolbox>
       <toolbox>
-        <embeddedcoder>
-          <enabled>true</enabled>
-        </embeddedcoder>
-      </toolbox>
-      <toolbox>
         <gpucoder>
           <enabled>true</enabled>
         </gpucoder>
-      </toolbox>
-      <toolbox>
-        <fixedpoint>
-          <enabled>true</enabled>
-        </fixedpoint>
-      </toolbox>
-      <toolbox>
-        <matlabhdlcoder>
-          <enabled>true</enabled>
-        </matlabhdlcoder>
       </toolbox>
       <toolbox>
         <neuralnetwork>

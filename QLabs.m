@@ -1,114 +1,25 @@
 classdef QLabs
-    %QLabs Download, install, and launch Quanser Interactive Labs
-    %   A set of functions to make it easy to get and use Quanser Interactive Labs.
+    %QLabs setup, and launch Quanser Interactive Labs
+    %   A set of functions to make it easy to setup and use Quanser Interactive Labs.
     %
-    %   * Type QLabs.install to download and install.  
-    %   * Type QLabs.register to go to the Quanser registration page.
+    %   * Type QLabs.setup to setup Quanser Interactive Labs after installing the add-on (only need to run it once).
+    %   * Type QLabs.register to go to the Quanser registration page. You need a QLabs account to use Quanser Interactive Labs.
     %   * Type QLabs.launch to launch the Quanser Interactive Labs.
+    %   * Type QLabs.remove to remove Quanser Interactive Labs. Need to run this before uninstalling the add-on.
     
     properties(Hidden, Constant)
+        Arch = string(computer("arch"));
+
         % Registration portal information
         RegistrationHost = "www.quanser.com";
         RegistrationPath = "mathworks-qlabs-trial";
 
-        % Installer download information
-        DownloadHost = "quanserinc.box.com";
-        DownloadPath = "shared/static";
-        ZipFileName = "lhf0gilgy1zu5hedkokb9mi025gzcu19.zip";
-        InstallerFileName = "Install QLabs.exe";
-
         %Installed Application info
         QLabInstalledRegistrationSubKey = "SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UpgradeCodes\8846B7B58AF54674387D6C27459B5088";
-        QLabFileName = "Quanser Interactive Labs.exe";
-        QLabFilePathInProgramFiles = ["Quanser","Quanser Interactive Labs"];
-        DownloadDir = tempdir;
+        QLabFilePathInProgramFiles = ["Quanser","Quanser Interactive Labs"];        
     end
     
     methods(Static, Access = public)
-        function download()
-            % download Download the installer for Quanser Interactive Labs
-
-            QLabs.errorIfPlatformInvalid;
-            if QLabs.isInstalled()
-                % It's already installed,  don't install again.
-                return
-            end
-
-            if ~QLabs.isZipPresent() && ~QLabs.isInstallerPresent()
-                % Only download if ZIP isn't downloaded, the install
-                % EXE isn't present
-
-                % Get the URI for the ZIP file to download
-                zipFileURI = QLabs.createSecureURI(QLabs.DownloadHost, QLabs.DownloadPath, QLabs.ZipFileName);
-
-                % Set up the HTTP get request and handler for file read
-                request = matlab.net.http.RequestMessage(matlab.net.http.RequestMethod.GET);
-                zipFilePath = fullfile(QLabs.DownloadDir,QLabs.ZipFileName);
-                consumer = matlab.net.http.io.FileConsumer(zipFilePath);
-
-                % Set up callback for download progress indicator
-                opt = matlab.net.http.HTTPOptions(...
-                    'ProgressMonitorFcn',@QLabsDownloadProgress,...
-                    'UseProgressMonitor',true);
-                try
-                    % Send the HTTP request
-                    httpResponse = request.send(zipFileURI,opt,consumer);
-                catch e
-                    if QLabs.isZipPresent()
-                        delete(zipFilePath);
-                    end
-                    switch e.identifier
-                        case 'MATLAB:webservices:OperationTerminatedByUser'
-                            error("QLabs:UserCanceledDownload","QLabs installer download cancelled")
-                        case 'MATLAB:webservices:UnknownHost'
-                            error("QLabs:UnknownHost","Cannot reach %s web server.  Check internet connection.",QLabs.DownloadHost)
-                        otherwise
-                            rethrow(e);
-                    end
-                end
-
-                % Handle HTTP responses
-                if httpResponse.StatusCode ~= matlab.net.http.StatusCode.OK
-                    error("QLabs:DownloadUnsuccessful","HTTP code %.0f (%s) when downloading ZIP file.",double(httpResponse.StatusCode),httpResponse.StatusCode)
-                end
-                if ~QLabs.isZipPresent()
-                    error("QLabs:CannotFindZipFile","Cannot find Zip file after successful download.")
-                end
-            end
-
-            % Unzip the downloaded file
-            if QLabs.isZipPresent() && ~QLabs.isInstallerPresent()
-                % If the ZIP is downloaded, but the Install EXE isn't
-                % present, then unzip
-                zipFilePath = fullfile(QLabs.DownloadDir,QLabs.ZipFileName);
-                try
-                    files = unzip(zipFilePath,QLabs.DownloadDir);
-                catch e
-                    switch e.identifier
-                        case 'MATLAB:io:archive:unzip:invalidZipFile'
-                            if QLabs.isZipPresent()
-                                delete(zipFilePath);
-                            end
-                            error("QLabs:BadDownload","QLabs download unsuccessful.  Please retry.")
-                        otherwise
-                            rethrow(e)
-                    end
-                end
-
-                % Make sure that we got the install file we expected.
-                if ~iscell(files) || ~numel(files) == 1
-                    error("QLabs:UnexpectedPayload","ZIP File Downloaded didn't match expected contents.")
-                end
-                [~,name,ext] = fileparts(string(files{1}));
-                if name + ext ~= QLabs.InstallerFileName
-                    error("QLabs:UnexpectedPayload","ZIP File Downloaded didn't match expected contents.")
-                end
-                if ~QLabs.isInstallerPresent()
-                    error("QLabs:CannotFindInstaller","Cannot find installer after successful unzipping.")
-                end
-            end
-        end
-
         function register()
             % register Open the registration web page for Quanser Interactive Labs in the system browser
 
@@ -116,33 +27,80 @@ classdef QLabs
             portalURI = QLabs.createSecureURI(QLabs.RegistrationHost, QLabs.RegistrationPath);
             stat = web(portalURI,"-browser");
             if stat ~= 0
-                error("QLabs:CouldNotLaunchBrowser",'Could not launch system browser. Please visit the QLabs registration page for MathWorks Academic Site License users at <a href="%s">QLabs Registration</a> in your web browser.',portalURI.EncodedURI);
+                error("QLabs:CouldNotLaunchBrowser",'We could not launch your default browser. Please visit the Quanser Interactive Labs registration page for MathWorks Academic Site License users to register at <a href="%s">QLabs Registration</a>.',portalURI.EncodedURI);
             end
         end
 
-        function install()
-            % install Install Quanser Interactive Labs.  Will download if needed.
-
+        function setup()
+            % Setup Quanser Interactive Labs.
             QLabs.errorIfPlatformInvalid;
             if QLabs.isInstalled()
                 % It's already installed,  don't install again.
                 return
             end
             if ~QLabs.isInstallerPresent()
-                % If the installer isn't present, download and install
-                QLabs.download();
+                % If the installer isn't present, something is wrong with
+                % the add-on installation. Prompt user to reinstall the
+                % add-on.
+                error("QLabs:UserInstallFailed","The Quanser Interactive Labs installer is missing. Please ensure that you have installed the Quanser Interactive Labs for MATLAB add-on.")
             end
 
-            installerPath = fullfile(QLabs.DownloadDir,QLabs.InstallerFileName);
-            exitCode = system("""" + installerPath + """ /install");
-            switch exitCode
-                case 0
-                    %success
-                case 1602
-                    error("QLabs:UserCanceledInstall","QLabs install cancelled")
-                otherwise
-                    error("QLabs:UserInstallFailed","QLabs install failed with a %d exit code",exitCode)
+            installerPath = fullfile(QLabs.getDownloadDir,QLabs.getInstallerFileNames());
+            current_dir = cd;
+            if QLabs.Arch == "maci64"
+                num_installer = numel(installerPath);
+                useful_prompt_shown = false;
+                for i = 1 : num_installer
+                    [installer_dir, ~, ~] = fileparts(installerPath{i});
+                    
+                    % Run the QSI installers.
+                    cd(installer_dir)
+                    if ~useful_prompt_shown
+                        disp('Thank you for your interest in Quanser Interactive Labs (QLabs).');
+                        disp('This process will install the QLabs application and supporting software for MATLAB Simulink.');
+                        disp('The setup process will take some time, but please do not interrupt the installation process.');
+                        disp('Please enter your system password when prompted so that the installer can configure our real-time support software.');
+                        useful_prompt_shown = true;
+                    end
+                    [exitCode, result] = system('sudo ./setup -q', '-echo');
+                    switch exitCode
+                        case 0
+                            %success
+                            if i == num_installer
+                                disp([int2str(i),' / ',int2str(num_installer),' Complete.']);
+                            else
+                                disp([int2str(i),' / ',int2str(num_installer),' Complete...']);
+                            end
+                        otherwise
+                            error("QLabs:UserInstallFailed","Install failed with a %d exit code and result %s. Please contact Quanser support for assistance.",exitCode,result)
+                    end
+                end
+                disp('Success. Continuing with the installation...');
+            else
+                disp('Thank you for your interest in Quanser Interactive Labs (QLabs).');
+                disp('This process will install the QLabs application and supporting software for MATLAB Simulink.');
+                disp('The setup process will take some time, but please do not interrupt the installation process.');
+                disp('Please follow the Quanser Interactive Labs Setup dialog when prompted so that the installer can configure our real-time support software.');
+                exitCode = system("""" + installerPath + """ /install");
+                switch exitCode
+                    case 0
+                        %success
+                        disp('Success. Continuing with the installation...');
+                    case 1602
+                        error("QLabs:UserCanceledInstall","Quanser Interactive Labs installation cancelled")
+                    otherwise
+                        error("QLabs:UserInstallFailed","Quanser Interactive Labs installation failed with a %d exit code. Please contact Quanser support for assistance.",exitCode)
+                end
             end
+
+            % Set up QUARC in MATLAB so that the user doesn't need to
+            % restart MATLAB before being able to use QUARC's blocks.
+            cd(fullfile(QLabs.getQUARCDirectory,"quarc"))
+            quarc_setup;
+            cd(current_dir);
+
+            uiwait(helpdlg('If your institution has a MATLAB site license, do not forget to register for your free Quanser Interactive Labs account using the MATLAB command ''QLabs.register'' before launching the application. ', 'QLabs Reminder'))
+            disp('Setup Complete!')
         end
 
         function launch()
@@ -150,96 +108,127 @@ classdef QLabs
 
             QLabs.errorIfPlatformInvalid;
             if ~QLabs.isInstalled()
-                % It's not installed, download and install
-                QLabs.install();
+                % It's not installed, install it.
+                QLabs.setup();
             end
 
-            qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.QLabFileName);
-            try
-                % Launch using .NET interface to avoid ugly command window
-                System.Diagnostics.Process.Start(qlabPath);
-            catch
-                
+            if QLabs.Arch == "maci64"
                 try
-                    % Alternative: Launch using system with trailing
-                    % ampersand to return immediately.
-                    system(qlabPath + " &");
+                    system('open -a QLabs');
                 catch
-                    error("QLabs:CouldNotLaunch","Could not launch QLabs")
+                    error("QLabs:CouldNotLaunch","Could not launch Quanser Interactive Labs. Please contact Quanser support for assistance.")
+                end
+            else
+                qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.getQLabsFileName());
+                try
+                    % Launch using .NET interface to avoid ugly command window
+                    System.Diagnostics.Process.Start(qlabPath);
+                catch
+                    
+                    try
+                        % Alternative: Launch using system with trailing
+                        % ampersand to return immediately.
+                        system(qlabPath + " &");
+                    catch
+                        error("QLabs:CouldNotLaunch","Could not launch Quanser Interactive Labs. Please contact Quanser support for assistance.")
+                    end
                 end
             end
         end
 
-        function uninstall()
-            % uninstall Uninstall Quanser Interactive Labs.
-
+        function remove()
+            % Unsetup Quanser Interactive Labs.
             QLabs.errorIfPlatformInvalid;
             if ~QLabs.isInstalled()
                 % It's not installed,  don't try to uninstall.
                 return
             end
-            installerPath = fullfile(QLabs.DownloadDir,QLabs.InstallerFileName);
-            exitCode = system("""" + installerPath + """ /uninstall");
-            switch exitCode
-                case 0
-                case 1602
-                    error("QLabs:UserCanceledInstall","QLabs uninstall cancelled")
-                otherwise
-                    error("QLabs:UserInstallFailed","QLabs uninstall failed with a %d exit code",exitCode)
-            end
 
-            % Remove the temporary files
-            QLabs.deleteZipAndInstaller();
-        end        
+            % Remove QUARC directories from MATLAB, so that users do not
+            % have to restart MATLAB to have the QUARC path removed.
+            if logical(exist('quarc_setup', "file"))
+                quarc_setup(0);
+            end
+            
+            if QLabs.Arch == "maci64"
+                % Run the QSI uninstaller
+                uninstallerPath = QLabs.getUninstallerFileNames();
+                num_uninstaller = numel(uninstallerPath);
+                useful_prompt_shown = false;
+                for i = 1 : num_uninstaller
+                    if ~useful_prompt_shown
+                        disp('Removing Quanser Interactive Labs including files from system folders.');
+                        disp('Please enter your system password when prompted.');
+                        useful_prompt_shown = true;
+                    end
+                    % Run the QSI uninstallers.
+                    uninstaller_command = "sudo " + uninstallerPath{i} + " -q";
+                    %disp(['Uninstalling ' uninstallerPath{i}])
+                    [exitCode, result] = system(uninstaller_command, '-echo');
+                    switch exitCode
+                        case 0
+                            %success
+                            if i < num_uninstaller
+                                disp(['Removed ',int2str(i), ' / ',int2str(num_uninstaller),'. Continuing to remove Quanser Interactive Labs...']);
+                            else
+                                disp(['Removed ',int2str(i), ' / ',int2str(num_uninstaller),'.']);
+                                disp('Quanser Interactive Labs has been successfully removed from your system.');
+                                disp('Do not forget to uninstall the add-on package from the MATLAB Add-on manager.');
+                            end
+                        otherwise
+                            error("QLabs:UserUnInstallFailed","Quanser Interactive Labs uninstall failed with a %d exit code and result %s. Please contact Quanser support for assistance.",exitCode,result)
+                    end
+                    
+                end
+            else
+                installerPath = fullfile(QLabs.getDownloadDir,QLabs.getInstallerFileNames());
+                exitCode = system("""" + installerPath + """ /uninstall");
+                switch exitCode
+                    case 0
+                        disp('Quanser Interactive Labs has been successfully removed from your system.');
+                        disp('Do not forget to uninstall the add-on package from the MATLAB Add-on manager.');
+                    case 1602
+                        error("QLabs:UserCanceledInstall","Quanser Interactive Labs uninstall cancelled")
+                    otherwise
+                        error("QLabs:UserUnInstallFailed","Quanser Interactive Labs uninstall failed with a %d exit code. Please contact Quanser support for assistance.",exitCode)
+                end
+            end
+        end
     end
 
     methods(Static, Hidden, Access = public)
-        % These utility functions are accessible, but undocumented.
-
-        function result = isZipPresent()
-            % isZipPresent Returns true if the ZIP file is present in the temporary directory.
-
-            QLabs.errorIfPlatformInvalid;
-            zipFilePath = fullfile(QLabs.DownloadDir,QLabs.ZipFileName);
-            result = logical(exist(zipFilePath,"file"));
-        end
-        
+        % These utility functions are accessible, but undocumented.        
         function result = isInstallerPresent()
-            % isInstallerPresent Returns true if the installer is present in the temporary directory.
-
+            % isInstallerPresent Returns true if the installer is present.
             QLabs.errorIfPlatformInvalid;
-            installerFilePath = fullfile(QLabs.DownloadDir,QLabs.InstallerFileName);
-            result = logical(exist(installerFilePath,"file"));
-        end
-        
-        function deleteZipAndInstaller()
-            % deleteZipAndInstaller Removes the ZIP file and installer from the temporary directory.
-
-            QLabs.errorIfPlatformInvalid;
-            if QLabs.isZipPresent()
-                zipFilePath = fullfile(QLabs.DownloadDir,QLabs.ZipFileName);
-                delete(zipFilePath);            
-            end
-            if QLabs.isInstallerPresent()
-                installerFilePath = fullfile(QLabs.DownloadDir,QLabs.InstallerFileName);
-                delete(installerFilePath);
+            result = true;
+            installerFilePath = fullfile(QLabs.getDownloadDir,QLabs.getInstallerFileNames());
+            num_installer_files = length(installerFilePath);
+            if num_installer_files > 1
+                for i = 1:num_installer_files
+                    result = result && logical(exist(installerFilePath(i),"file"));
+                end
+            else
+                result = logical(exist(installerFilePath,"file"));
             end
         end
-        
+                
         function result = isInstalled()
             % isInstalled Returns true if QLabs is installed.
             QLabs.errorIfPlatformInvalid;
 
-            % Check the registry
-            try
-                winqueryreg("name","HKEY_LOCAL_MACHINE",QLabs.QLabInstalledRegistrationSubKey);
-            catch
-                result = false;
-                return
+            if QLabs.Arch == "win64"
+                % Check the registry
+                try
+                    winqueryreg("name","HKEY_LOCAL_MACHINE",QLabs.QLabInstalledRegistrationSubKey);
+                catch
+                    result = false;
+                    return
+                end
             end
-            
-            % Look for the .EXE
-            qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.QLabFileName);
+
+            % Look for the executable
+            qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.getQLabsFileName());
             result = logical(exist(qlabPath,"file"));
         end
     end
@@ -264,20 +253,61 @@ classdef QLabs
         end
 
         function errorIfPlatformInvalid
-            % errorIfPlatformInvalid Throws an error on any platform other than win64
+            % errorIfPlatformInvalid Throws an error on any platform that
+            % we do not support
+            if QLabs.Arch ~= "win64" && QLabs.Arch ~= "maci64"
+                throwAsCaller(MException("QLabs:Unsupported Platform","Quanser Interactive Labs requires a 64-bit Windows platform."))
+            end
+        end
 
-            archstr = string(computer("arch"));
-            if archstr ~= "win64"
-                throwAsCaller(MException("QLabs:Unsupported Platform","QLabs requires 64-bit Windows platform."))
+        function path = getQuanserDirectory()
+            % getQuanserDirectory returns the directory where Quanser software
+            % is installed
+
+            if QLabs.Arch == "maci64"
+                path = fullfile(filesep,"opt","quanser");
+            else
+                % For QLab's installed QUARC, we don't allow user to change
+                % the locaiton of where QUARC is installed, so it'll always
+                % be the proper Program Files\Quanser
+                path = fullfile(QLabs.getProgramFilesDirectory(),"Quanser");
+            end
+
+            if ~logical(exist(path,"dir"))
+                error("QLabs:CouldNotFindQuanserPath","Cannot locate the Quanser directory")
             end
         end
 
         function path = getQLabsDirectory()
-            % getQLabsDirectory Gets the QLab directory in program files
+            % getQLabsDirectory returns the directory where QLab is
+            % installed
 
-            path = fullfile(QLabs.getProgramFilesDirectory(),join(QLabs.QLabFilePathInProgramFiles,filesep));
+            if QLabs.Arch == "maci64"
+                path = fullfile(filesep,"Applications");
+            else
+                path = fullfile(QLabs.getProgramFilesDirectory(),join(QLabs.QLabFilePathInProgramFiles,filesep));
+            end
+
             if ~logical(exist(path,"dir"))
-                error("QLabs:CouldNotFindQLabsEXE","Cannot locate QLabs directory")
+                error("QLabs:CouldNotFindQLabsPath","Cannot locate the Quanser Interactive Labs directory")
+            end
+        end
+
+        function path = getQUARCDirectory()
+            % getQUARCDirectory returns the directory where QUARC is
+            % installed
+
+            if QLabs.Arch == "maci64"
+                path = fullfile(QLabs.getQuanserDirectory(),"quarc");
+            else
+                % For QLab's installed QUARC, we don't allow user to change
+                % the locaiton of where QUARC is installed, so it'll always
+                % be the proper Program Files\Quanser\QUARC
+                path = fullfile(QLabs.getQuanserDirectory(), "QUARC");
+            end
+
+            if ~logical(exist(path,"dir"))
+                error("QLabs:CouldNotFindQUARCPath","Cannot locate the QUARC Home directory")
             end
         end
 
@@ -286,10 +316,68 @@ classdef QLabs
             try
                 path = strtrim(string(winqueryreg("HKEY_LOCAL_MACHINE","SOFTWARE\Microsoft\Windows\CurrentVersion","ProgramFilesPath")));
             catch e
-                error("QLabs:CouldNotFindQLabsEXE","Cannot locate Program Files directory")
+                error("QLabs:CouldNotFindQLabsEXE","Cannot locate the Program Files directory")
             end
             if ~logical(exist(path,"dir"))
-                error("QLabs:CouldNotFindQLabsEXE","Cannot locate Program Files directory")
+                error("QLabs:CouldNotFindQLabsEXE","Cannot locate the Program Files directory")
+            end
+        end
+
+        function host = getDownloadHost()
+            if QLabs.Arch == "maci64"
+                host = "quanserinc.box.com";
+            else
+                host = "quanserinc.box.com";
+            end
+        end
+
+        function path = getDownloadPath()
+            if QLabs.Arch == "maci64"
+                path = "shared/static";
+            else
+                path = "shared/static";
+            end
+        end
+
+        function downloadDir = getDownloadDir()
+            % The installer is downloaded by the add-on, and the location
+            % is stored in a MATLAB auto-generated function that returns
+            % the proper location of the folder on the client's computer.
+            downloadDir = Mathworks_QLabs.getInstallationLocation('Quanser Interactive Labs and QUARC Home for MATLAB Simulink');
+        end
+
+        function zipNames = getZipFileName()
+            if QLabs.Arch == "maci64"
+                zipNames = "cd521ztbt9ym0vn1xe193rrn27v3s32p.zip";
+            else
+                zipNames = "lhf0gilgy1zu5hedkokb9mi025gzcu19.zip";
+            end
+        end
+
+        function installerNames = getInstallerFileNames()
+            if QLabs.Arch == "maci64"
+                installerNames = [...
+                                string(fullfile('quarc_mac_installer', 'quarc_host_mac.qsi')), ...
+                                string(fullfile('qlabs_mac_installer', 'qlabs_mac.qsi'))...
+                                ];
+            else
+                installerNames = "Install QLabs.exe";
+            end
+        end
+
+        function unInstallerNames = getUninstallerFileNames()
+            if QLabs.Arch == "maci64"
+                unInstallerNames = QLabs.getQuanserDirectory() + filesep + ["qlabs/bin/uninstall_qlabs", "quarc/bin/uninstall_quarc_host"];
+            else
+                unInstallerNames = "Install QLabs.exe";
+            end
+        end
+
+        function qlabsFileName = getQLabsFileName()
+            if QLabs.Arch == "maci64"
+                qlabsFileName = "QLabs.app";
+            else
+                qlabsFileName = "Quanser Interactive Labs.exe";
             end
         end
     end
