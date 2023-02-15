@@ -11,9 +11,8 @@ Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring c
 If you have a MathWorks Campus-Wide License, you can gain access to the QLabs Virtual QUBE-Servo 2 DC Motor virtual experiment for free. Otherwise, please visit [Quanser](https://www.quanser.com/digital/quanser-interactive-labs/) for more information.
 
 1. If you have not done so already, please visit the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing to create your account.
-2. In GitHub, download the latest `Quanser_Interactive_Labs_for_MATLAB.mltbx` file, or search for Quanser in the MATALB Add-on Explorer.
-3. Double click the file downloaded, or install the add-on in MATLAB
-4. Once the add-in is installed, type ``QLabs.setup`` in MATLAB to start the installation process
+2. Click "Add" on the Quanser Interactive Labs for MATALB landing page in the MATLAB Add-on Explorer.
+3. Once the add-in is installed, type ``QLabs.setup`` in MATLAB to start the installation process
 5. Once install completes, type ``QLabs.launch``
 
 ## More Information
