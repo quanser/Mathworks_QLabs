@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="660385911" file="C:\Users\jshu\MATLAB\Mathworks_QLabs\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="C:\Users\jshu\MATLAB\Mathworks_QLabs\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="660385911" file="D:\GitHub\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.prj" location="D:\GitHub\Mathworks_QLabs" name="Quanser Interactive Labs for MATLAB" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Quanser Interactive Labs for MATLAB</param.appname>
     <param.authnamewatermark>Quanser</param.authnamewatermark>
     <param.email>digital@quanser.com</param.email>
@@ -13,7 +13,7 @@ If you have a MathWorks Campus-Wide License, you can gain access to the Virtual 
 
 Type ``QLabs.setup`` in MATLAB to configure Quanser Interactive Labs after installing the add-on (only need to run it once). Once setup is done, type ``QLabs.launch`` to launch the Quanser Interactive Labs.</param.description>
     <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
-    <param.version>2.14.0.1</param.version>
+    <param.version>2.15.0.2</param.version>
     <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
     <param.products.name>
       <item>MATLAB</item>
@@ -105,11 +105,11 @@ QLabsDownloadProgress.m</param.exclude.filters>
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs for MATLAB.mltbx" optional="false">C:\Users\jshu\MATLAB\Mathworks_QLabs\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Quanser Interactive Labs for MATLAB.mltbx" optional="false">D:\GitHub\Mathworks_QLabs\Quanser Interactive Labs for MATLAB.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>K:\Program Files\MATLAB\R2021b</root>
+      <root>C:\Program Files\MATLAB\R2021b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="gpucoder" />
