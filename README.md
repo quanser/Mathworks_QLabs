@@ -10,10 +10,11 @@ Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring c
 
 If you have a MathWorks Campus-Wide License, you can gain access to the QLabs Virtual QUBE-Servo 2 DC Motor virtual experiment for free. Otherwise, please visit [Quanser](https://www.quanser.com/digital/quanser-interactive-labs/) for more information.
 
-1. If you have not done so already, please visit the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing to create your account.
-2. Click "Add" on the Quanser Interactive Labs for MATALB landing page in the MATLAB Add-on Explorer.
-3. Once the add-in is installed, type ``QLabs.setup`` in MATLAB to start the installation process
-5. Once install completes, type ``QLabs.launch``
+1. If you have not done so already, please visit the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial) before installing, to create your account.
+2. If Quanser Interactive Labs for MATLAB is already installed and you would like to install a different version, first type ``QLabs.remove``, to uninstall the current version.
+3. For your desired version, click the ``Add`` button on the Quanser Interactive Labs for MATLAB page of the Add-On Explorer.
+4. Once the add-on is installed, type ``QLabs.setup`` in MATLAB to start the installation process.
+5. Once installation completes, type ``QLabs.launch``.
 
 ## More Information
 
@@ -22,9 +23,9 @@ The add-on contains several commands to make it easy to download, install, and u
 |Command|Description|
 |--------|-----------|
 |``QLabs.register``|Opens the [Quanser registration page](https://www.quanser.com/mathworks-qlabs-trial).|
-|``QLabs.setup``|Installs Quanser Interactive Labs. Downloads if needed.|
-|``QLabs.launch``|launches Quanser Interactive Labs.  Downloads and installs if needed.|
-|``QLabs.remove``|uninstalls QLabs and deletes temporary downloaded files.|
+|``QLabs.setup``|Installs Quanser Interactive Labs. Downloads, if needed.|
+|``QLabs.launch``|Launches Quanser Interactive Labs.  Downloads and installs, if needed.|
+|``QLabs.remove``|Uninstalls Quanser Interactive Labs and deletes temporary downloaded files.|
 
 ## System Requirements
 
@@ -37,11 +38,11 @@ The add-on contains several commands to make it easy to download, install, and u
 ### Minimum Hardware
 
 * __Video Card:__ Intel HD 520 or equivalent DX11 GPU
-* __Processor:__ Core i5-6300U series mobile CPU or equivalent
+* __Processor:__ Core i5-6300U series mobile CPU, or equivalent
 * __Memory:__ 8 GB RAM
 
 ### Recommended Hardware
 
 * __Video Card:__ Intel UHD 620 or equivalent GPU
-* __Processor:__ Core i7-8665U mobile CPU or equivalent
+* __Processor:__ Core i7-8665U mobile CPU, or equivalent
 * __Memory:__ 16 GB RAM
