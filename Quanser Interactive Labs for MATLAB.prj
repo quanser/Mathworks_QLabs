@@ -5,15 +5,17 @@
     <param.email>digital@quanser.com</param.email>
     <param.company>Quanser</param.company>
     <param.summary>High-fidelity digital twins of Quanser’s world renowned controls, mechatronics, and robotics hardware for teaching and research.</param.summary>
-    <param.description>Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring credible, high-fidelity interactive lab experiences to students in blended, hybrid, or remote laboratory configurations. QLabs delivers a collection of virtual hardware-based laboratory activities that can supplement traditional or online courses. The virtual hardware is based on industry leading Quanser physical systems and offers academically appropriate experiences offline on desktops and laptops on and off campus.
+    <param.description>Quanser Interactive Labs (QLabs) is a hardware-inspired, scalable way to bring credible, high-fidelity interactive lab experiences to students in blended, hybrid, or remote laboratory configurations. QLabs delivers a collection of virtual hardware-based laboratory activities that can supplement traditional or online courses. The virtual hardware is based on industry leading Quanser physical systems and offers academically appropriate experiences offline on desktops and laptops, on and off campus.
 
 Getting Started
-
 If you have a MathWorks Campus-Wide License, you can gain access to the Virtual QUBE-Servo 2 DC Motor virtual experiment for free. Otherwise, please visit https://www.quanser.com/digital/quanser-interactive-labs/ for more information.
 
-Type ``QLabs.setup`` in MATLAB to configure Quanser Interactive Labs after installing the add-on (only need to run it once). Once setup is done, type ``QLabs.launch`` to launch the Quanser Interactive Labs.</param.description>
+If Quanser Interactive Labs is already installed and you are upgrading, type "QLabs.remove" in MATLAB, and uninstall the current add-on.
+Select, add and install the Quanser Interactive Labs add-on.
+Type "QLabs.setup" in MATLAB to configure Quanser Interactive Labs after installing the add-on (only need to run it once). 
+Once setup is done, type "QLabs.launch" to launch Quanser Interactive Labs.</param.description>
     <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
-    <param.version>2.15.0.2</param.version>
+    <param.version>2.15.0.3</param.version>
     <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
     <param.products.name>
       <item>MATLAB</item>
