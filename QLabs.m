@@ -323,35 +323,11 @@ classdef QLabs
             end
         end
 
-        function host = getDownloadHost()
-            if QLabs.Arch == "maci64"
-                host = "quanserinc.box.com";
-            else
-                host = "quanserinc.box.com";
-            end
-        end
-
-        function path = getDownloadPath()
-            if QLabs.Arch == "maci64"
-                path = "shared/static";
-            else
-                path = "shared/static";
-            end
-        end
-
         function downloadDir = getDownloadDir()
             % The installer is downloaded by the add-on, and the location
             % is stored in a MATLAB auto-generated function that returns
             % the proper location of the folder on the client's computer.
             downloadDir = Mathworks_QLabs.getInstallationLocation('Quanser Interactive Labs and QUARC Home for MATLAB Simulink');
-        end
-
-        function zipNames = getZipFileName()
-            if QLabs.Arch == "maci64"
-                zipNames = "cd521ztbt9ym0vn1xe193rrn27v3s32p.zip";
-            else
-                zipNames = "lhf0gilgy1zu5hedkokb9mi025gzcu19.zip";
-            end
         end
 
         function installerNames = getInstallerFileNames()
