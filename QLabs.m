@@ -47,7 +47,20 @@ classdef QLabs
 
             installerPath = fullfile(QLabs.getDownloadDir,QLabs.getInstallerFileNames());
             current_dir = cd;
-            if QLabs.Arch == "maci64"
+            if QLabs.runningOnMac
+
+                if QLabs.runningOnRosetta
+                    architecture = 'arm64';
+                else
+                    [~, result] = system('arch');
+                    architecture = strtrim(result);
+                    if strcmp(architecture, 'i386')
+                        architecture = 'x86_64';
+                    end
+                end
+
+                setup_command = sprintf('arch -%s sudo ./setup -q', architecture);
+
                 num_installer = numel(installerPath);
                 useful_prompt_shown = false;
                 for i = 1 : num_installer
@@ -62,7 +75,7 @@ classdef QLabs
                         disp('Please enter your system password when prompted so that the installer can configure our real-time support software.');
                         useful_prompt_shown = true;
                     end
-                    [exitCode, result] = system('sudo ./setup -q', '-echo');
+                    [exitCode, result] = system(setup_command, '-echo');
                     switch exitCode
                         case 0
                             %success
@@ -257,6 +270,27 @@ classdef QLabs
             % we do not support
             if QLabs.Arch ~= "win64" && QLabs.Arch ~= "maci64"
                 throwAsCaller(MException("QLabs:Unsupported Platform","Quanser Interactive Labs requires a 64-bit Windows platform."))
+            end
+        end
+
+        function result = runningOnMac
+            result = false;
+
+            if strncmp(QLabs.Arch, "mac", 3)
+                result = true;
+                return
+            end
+        end
+
+        function result = runningOnRosetta
+            result = false;
+
+            if QLabs.runningOnMac
+                [exitCode, exitResult] = system('sysctl -n sysctl.proc_translated');
+                if exitCode == 0 && strcmp(strtrim(exitResult), '1')
+                    result = true;
+                    return
+                end
             end
         end
 
