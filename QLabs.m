@@ -88,6 +88,19 @@ classdef QLabs
                             error("QLabs:UserInstallFailed","Install failed with a %d exit code and result %s. Please contact Quanser support for assistance.",exitCode,result)
                     end
                 end
+                
+                % For MATLAB that run on Rosetta, we need to register the license for the Intel architecture as well
+                if QLabs.runningOnRosetta
+                    register_license_command = 'sudo /opt/quanser/bin/quanser_license_registration -q -m -c -f /opt/quanser/qlabs/qlabs_quarc_mac_license.qlic';
+                    [exitCode, result] = system(register_license_command);
+                    switch exitCode
+                        case 0
+                            disp(['License registration complete.']);
+                        otherwise
+                            error("QLabs:UserInstallFailed","License registration failed with a %d exit code and result %s. Please contact Quanser support for assistance.",exitCode,result)
+                    end
+                end
+                
                 disp('Success. Continuing with the installation...');
             else
                 disp('Thank you for your interest in Quanser Interactive Labs (QLabs).');
