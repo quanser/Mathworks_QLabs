@@ -89,17 +89,8 @@ classdef QLabs
                     end
                 end
                 
-                % For MATLAB that run on Rosetta, we need to register the license for the Intel architecture as well
-                if QLabs.runningOnRosetta
-                    register_license_command = 'sudo /opt/quanser/bin/quanser_license_registration -q -m -c -f /opt/quanser/qlabs/qlabs_quarc_mac_license.qlic';
-                    [exitCode, result] = system(register_license_command);
-                    switch exitCode
-                        case 0
-                            disp(['License registration complete.']);
-                        otherwise
-                            error("QLabs:UserInstallFailed","License registration failed with a %d exit code and result %s. Please contact Quanser support for assistance.",exitCode,result)
-                    end
-                end
+                % Give some time for QUARC/QLabs installations to finish up.
+                pause(10);
                 
                 disp('Success. Continuing with the installation...');
             else
@@ -282,7 +273,7 @@ classdef QLabs
             % errorIfPlatformInvalid Throws an error on any platform that
             % we do not support
             if QLabs.Arch ~= "win64" && QLabs.Arch ~= "maci64"
-                throwAsCaller(MException("QLabs:Unsupported Platform","Quanser Interactive Labs requires a 64-bit Windows platform."))
+                throwAsCaller(MException("QLabs:Unsupported Platform","Quanser Interactive Labs requires a 64-bit Windows or Intel Mac platform."))
             end
         end
 
