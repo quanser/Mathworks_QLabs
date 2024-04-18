@@ -31,7 +31,7 @@ The add-on contains several commands to make it easy to download, install, and u
 
 ### Software
 
-* MATLAB R2021a to R2023b
+* MATLAB R2021a to R2024a
 * Simulink&reg;
 * Windows 10 or later, or macOS Mojave 10.14.6 or later
 
