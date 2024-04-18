@@ -129,11 +129,21 @@ classdef QLabs
                 QLabs.setup();
             end
 
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 try
-                    system('open -a QLabs');
-                catch
-                    error("QLabs:CouldNotLaunch","Could not launch Quanser Interactive Labs. Please contact Quanser support for assistance.")
+                    [exitCode, result] = system('open -a QLabs');
+                    if exitCode ~= 0
+                        if contains(result, 'error=Error Domain=NSOSStatusErrorDomain Code=-10669')
+                            error("QLabs:NeedsRosetta","Problem launching Quanser Interactive Labs. You must install Rosetta 2 by launching QLabs via Spotlight, and follow the instructions on installing Rosetta 2. Then call QLabs.launch again.")
+                        else
+                            error("QLabs:LaunchFail", "Could not launch Quanser Interactive Labs. Please contact Quanser support for assistance. Error: %s", result);
+                        end
+                    end
+                catch ME
+                    if (~strcmp(ME.identifier, 'QLabs:NeedsRosetta') && ~strcmp(ME.identifier, 'QLabs::LaunchFail'))
+                        error("QLabs:CouldNotLaunch","Could not launch Quanser Interactive Labs. Please contact Quanser support for assistance.")
+                    end
+                    rethrow(ME)
                 end
             else
                 qlabPath = fullfile(QLabs.getQLabsDirectory(),QLabs.getQLabsFileName());
@@ -167,7 +177,7 @@ classdef QLabs
                 quarc_setup(0);
             end
             
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 % Run the QSI uninstaller
                 uninstallerPath = QLabs.getUninstallerFileNames();
                 num_uninstaller = numel(uninstallerPath);
@@ -272,7 +282,7 @@ classdef QLabs
         function errorIfPlatformInvalid
             % errorIfPlatformInvalid Throws an error on any platform that
             % we do not support
-            if QLabs.Arch ~= "win64" && QLabs.Arch ~= "maci64"
+            if QLabs.Arch ~= "win64" && QLabs.Arch ~= "maci64" && QLabs.Arch ~= "maca64"
                 throwAsCaller(MException("QLabs:Unsupported Platform","Quanser Interactive Labs requires a 64-bit Windows or Intel Mac platform."))
             end
         end
@@ -302,7 +312,7 @@ classdef QLabs
             % getQuanserDirectory returns the directory where Quanser software
             % is installed
 
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 path = fullfile(filesep,"opt","quanser");
             else
                 % For QLab's installed QUARC, we don't allow user to change
@@ -320,7 +330,7 @@ classdef QLabs
             % getQLabsDirectory returns the directory where QLab is
             % installed
 
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 path = fullfile(filesep,"Applications");
             else
                 path = fullfile(QLabs.getProgramFilesDirectory(),join(QLabs.QLabFilePathInProgramFiles,filesep));
@@ -335,7 +345,7 @@ classdef QLabs
             % getQUARCDirectory returns the directory where QUARC is
             % installed
 
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 path = fullfile(QLabs.getQuanserDirectory(),"quarc");
             else
                 % For QLab's installed QUARC, we don't allow user to change
@@ -369,7 +379,7 @@ classdef QLabs
         end
 
         function installerNames = getInstallerFileNames()
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 installerNames = [...
                                 string(fullfile('quarc_mac_installer', 'quarc_host_mac.qsi')), ...
                                 string(fullfile('qlabs_mac_installer', 'qlabs_mac.qsi'))...
@@ -380,7 +390,7 @@ classdef QLabs
         end
 
         function unInstallerNames = getUninstallerFileNames()
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 unInstallerNames = QLabs.getQuanserDirectory() + filesep + ["qlabs/bin/uninstall_qlabs", "quarc/bin/uninstall_quarc_host"];
             else
                 unInstallerNames = "Install QLabs.exe";
@@ -388,7 +398,7 @@ classdef QLabs
         end
 
         function qlabsFileName = getQLabsFileName()
-            if QLabs.Arch == "maci64"
+            if strncmpi(QLabs.Arch, "mac", 3)
                 qlabsFileName = "QLabs.app";
             else
                 qlabsFileName = "Quanser Interactive Labs.exe";

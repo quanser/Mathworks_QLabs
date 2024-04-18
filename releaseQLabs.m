@@ -89,7 +89,7 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
         end
 
         % Set the Mac zip file
-        ret = setDownloadPath(doc, version_path, "maci64");
+        ret = setDownloadPath(doc, version_path, "mac64");
         if ~ret
             return
         end
@@ -98,7 +98,7 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
     function ret = setDownloadPath(doc, version_path, target)
         ret = true;
         
-        % target can come in as "win64" or "maci64", etc.
+        % target can come in as "win64" or "mac64", etc.
         % However the MATLAB project file only use "win" or "mac"
         target_char = char(target);
         target_short = string(target_char(1:3));
