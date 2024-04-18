@@ -29,12 +29,6 @@ The add-on contains several commands to make it easy to download, install, and u
 
 ## System Requirements
 
-### Software
-
-* MATLAB R2021a to R2024a
-* Simulink&reg;
-* Windows 10 or later, or macOS Mojave 10.14.6 or later
-
 ### Minimum Hardware
 
 * __Video Card:__ Intel HD 520 or equivalent DX11 GPU
