@@ -6,6 +6,15 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
         releaseType (1,1) string = "build"
         matlabReleaseEnd (1,1) string = ""
     end
+
+    % Looks like R2024a (and above) does not work with toolbox that are built
+    % using pre R2024a's tool. So have to make sure this function is called
+    % with R2024a or newer.
+    matlab_version = ver('matlab');
+    matlab_version_num = str2double(matlab_version.Version);
+    if (matlab_version_num < 24.1)  % R2024a
+        error('This function must be run in MATLAB R2024a or above.');
+    end
     
     packagingProjectFile = fullfile("Quanser Interactive Labs for MATLAB.prj");
     
