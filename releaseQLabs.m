@@ -1,10 +1,11 @@
-function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
+function newVersion = releaseQLabs(releaseType, matlabReleaseEnd, repo_url)
 % Release a new version of the toolbox.  Version is automatically
 % incremented.  OPTION can be "major", "minor", or "patch" to update
 % version number appropriately.
     arguments
         releaseType (1,1) string = "build"
         matlabReleaseEnd (1,1) string = ""
+        repo_url (1,1) string = "https://download.quanser.com/qlabs/"
     end
 
     % Looks like R2024a (and above) does not work with toolbox that are built
@@ -18,11 +19,11 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
     
     packagingProjectFile = fullfile("Quanser Interactive Labs for MATLAB.prj");
     
-    newVersion = incrementMLTBXVersion(packagingProjectFile,releaseType);
+    newVersion = incrementMLTBXVersion(packagingProjectFile, releaseType, matlabReleaseEnd, repo_url);
     
     matlab.addons.toolbox.packageToolbox(packagingProjectFile,'release/Quanser_Interactive_Labs_for_MATLAB')
     
-    function newVersion = incrementMLTBXVersion(packagingProjectFile, releaseType)
+    function newVersion = incrementMLTBXVersion(packagingProjectFile, releaseType, matlabReleaseEnd, repo_url)
         oldVersion = string(matlab.addons.toolbox.toolboxVersion(packagingProjectFile));
         pat = digitsPattern;
         versionParts = extract(oldVersion,pat);
@@ -52,10 +53,10 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
 
         doc = xmlread(packagingProjectFile);
 
-        if (updateMLTBXAdditionalSoftwareSource(doc, newVersion))
+        if updateMLTBXAdditionalSoftwareSource(doc, newVersion, repo_url)
             
             if (strlength(matlabReleaseEnd) > 0)
-                if ~updateMLTBXMATLABReleaseEnd(doc, matlabReleaseEnd);
+                if ~updateMLTBXMATLABReleaseEnd(doc, matlabReleaseEnd)
                     disp('Cannot update last supported MATLAB release.')
                     ret = false;
                 end
@@ -86,25 +87,25 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
         end
     end
 
-    function ret = updateMLTBXAdditionalSoftwareSource(doc, version)
+    function ret = updateMLTBXAdditionalSoftwareSource(doc, version, repo_url)
         pat = digitsPattern;
         versionParts = extract(version, pat);
         version_path = versionParts(1) + '.' + versionParts(2);
 
         % Set the Windows zip file
-        ret = setDownloadPath(doc, version_path, "win64");
+        ret = setDownloadPath(doc, version_path, "win64", repo_url);
         if ~ret
             return
         end
 
         % Set the Mac zip file
-        ret = setDownloadPath(doc, version_path, "mac64");
+        ret = setDownloadPath(doc, version_path, "mac64", repo_url);
         if ~ret
             return
         end
     end
 
-    function ret = setDownloadPath(doc, version_path, target)
+    function ret = setDownloadPath(doc, version_path, target, repo_url)
         ret = true;
         
         % target can come in as "win64" or "mac64", etc.
@@ -128,7 +129,7 @@ function newVersion = releaseQLabs(releaseType, matlabReleaseEnd)
             return;
         end
 
-        content = "https://download.quanser.com/qlabs/" + version_path + "/QLabs_Installer_" + target + ".zip";
+        content = repo_url + version_path + "/QLabs_Installer_" + target + ".zip";
         url_item.item(0).setTextContent(content);
     end
 
