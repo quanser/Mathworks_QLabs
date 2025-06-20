@@ -31,12 +31,12 @@ The add-on contains several commands to make it easy to download, install, and u
 
 ### Minimum Hardware
 
-* __Video Card:__ Intel HD 520 or equivalent DX11 GPU
-* __Processor:__ Core i5-6300U series mobile CPU, or equivalent
+* __Video Card:__ Intel UHD or Intel Iris Xe integrated GPU, or equivalent
+* __Processor:__ Intel Core Ultra 5, Intel Core i5, AMD Ryzen 5, or equivalent
 * __Memory:__ 8 GB RAM
 
 ### Recommended Hardware
 
-* __Video Card:__ Intel UHD 620 or equivalent GPU
-* __Processor:__ Core i7-8665U mobile CPU, or equivalent
+* __Video Card:__ Intel Iris or Intel Arc integrated GPU, or equivalent
+* __Processor:__ Intel Core Ultra 7, Intel Core i7, AMD Ryzen 7, or equivalent
 * __Memory:__ 16 GB RAM
