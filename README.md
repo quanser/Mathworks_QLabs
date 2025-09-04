@@ -37,6 +37,6 @@ The add-on contains several commands to make it easy to download, install, and u
 
 ### Recommended Hardware
 
-* __Video Card:__ Intel Iris or Intel Arc integrated GPU, or equivalent
+* __Video Card:__ Intel Iris Xe or Intel Arc integrated GPU, or equivalent
 * __Processor:__ Intel Core Ultra 7, Intel Core i7, AMD Ryzen 7, or equivalent
 * __Memory:__ 16 GB RAM
