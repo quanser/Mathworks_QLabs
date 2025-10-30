@@ -15,7 +15,7 @@ Select, add and install the Quanser Interactive Labs add-on.
 Type "QLabs.setup" in MATLAB to configure Quanser Interactive Labs after installing the add-on (only need to run it once). 
 Once setup is done, type "QLabs.launch" to launch Quanser Interactive Labs.</param.description>
     <param.screenshot>${PROJECT_ROOT}\img\QlabLogo1.png</param.screenshot>
-    <param.version>2.23.0.14</param.version>
+    <param.version>2.24.0.15</param.version>
     <param.output>${PROJECT_ROOT}\Quanser Interactive Labs for MATLAB.mltbx</param.output>
     <param.products.name>
       <item>MATLAB</item>
@@ -54,7 +54,7 @@ QLabsDownloadProgress.m</param.exclude.filters>
     <param.matlab.project.id />
     <param.matlab.project.name />
     <param.release.start>R2021a</param.release.start>
-    <param.release.end>R2025a</param.release.end>
+    <param.release.end>R2025b</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
     <param.compatiblity.macos>true</param.compatiblity.macos>
@@ -68,10 +68,10 @@ QLabsDownloadProgress.m</param.exclude.filters>
       <item>https://www.quanser.com/digital-eula</item>
     </param.additional.sw.licenses>
     <param.additional.sw.win.url>
-      <item>https://download.quanser.com/qlabs/2.23/QLabs_Installer_win64.zip</item>
+      <item>https://download.quanser.com/qlabs/2.24/QLabs_Installer_win64.zip</item>
     </param.additional.sw.win.url>
     <param.additional.sw.mac.url>
-      <item>https://download.quanser.com/qlabs/2.23/QLabs_Installer_mac64.zip</item>
+      <item>https://download.quanser.com/qlabs/2.24/QLabs_Installer_mac64.zip</item>
     </param.additional.sw.mac.url>
     <param.additional.sw.linux.url>
       <item />
