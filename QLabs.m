@@ -375,7 +375,16 @@ classdef QLabs
             % The installer is downloaded by the add-on, and the location
             % is stored in a MATLAB auto-generated function that returns
             % the proper location of the folder on the client's computer.
-            downloadDir = Mathworks_QLabs.getInstallationLocation('Quanser Interactive Labs and QUARC Home for MATLAB Simulink');
+            try
+                downloadDir = Mathworks_QLabs.getInstallationLocation('Quanser Interactive Labs and QUARC Home for MATLAB Simulink');
+            catch
+                % Note that the above might not always work, due to a bug in MATLAB add-on installer,
+                % the "getInstallationLocation.mlx" file might not always get created.
+                % So instead we're going to generate the path to the QLabs installer directly.
+                script_name = mfilename("fullpath");
+                toolbox_path = fileparts(fileparts(script_name));
+                downloadDir = fullfile(toolbox_path,'Additional Software', 'QuanserInteractiveLabsAndQUARCHomeForMATLABSimulink');
+            end
         end
 
         function installerNames = getInstallerFileNames()
