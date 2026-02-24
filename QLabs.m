@@ -133,7 +133,7 @@ classdef QLabs
                 try
                     [exitCode, result] = system('open -a QLabs');
                     if exitCode ~= 0
-                        if contains(result, 'error=Error Domain=NSOSStatusErrorDomain Code=-10669')
+                        if contains(result, '-10669')
                             error("QLabs:NeedsRosetta","Problem launching Quanser Interactive Labs. You must install Rosetta 2 by launching QLabs via Spotlight, and follow the instructions on installing Rosetta 2. Then call QLabs.launch again.")
                         else
                             error("QLabs:LaunchFail", "Could not launch Quanser Interactive Labs. Please contact Quanser support for assistance. Error: %s", result);
